@@ -8,13 +8,17 @@ function TodoList() {
     const [inputValue, setInputValue] = useState('');
     const [todoList, setTodoList] = useState([]);
 
+    function handleChange(event: React.FormEvent<HTMLInputElement>) {
+        setInputValue((event.target as HTMLInputElement).value);
+    }
+
     function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault();
+
         const tempArr = todoList;
         tempArr.unshift(inputValue);
         setTodoList(tempArr);
         setInputValue('');
-        console.log(todoList);
     }
 
     return (
@@ -24,7 +28,7 @@ function TodoList() {
                     type="text"
                     placeholder="What to do"
                     value={inputValue}
-                    onChange={event => setInputValue(event.target.value)}
+                    onChange={handleChange}
                 />
             </form>
             {
